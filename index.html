@@ -79,7 +79,6 @@
           </div>
 
           <button class="btn-icon-hud active" id="soundToggleBtn" title="Toggle Sound FX">🔊</button>
-          <button class="btn-secondary" id="supabaseBtn" title="Supabase Cloud Database & Auth">⚡ Supabase</button>
           <button class="btn-secondary" id="relicsBtn" title="View Unlocked Artifacts">👑 Relics</button>
           <button class="btn-primary-hud" id="realmMapBtn" title="Open World Map">🗺️ Quest Map</button>
 
@@ -381,69 +380,6 @@
         <button class="modal-close-btn">×</button>
       </div>
       <div class="modal-body" id="hintsModalBody"></div>
-    </div>
-  </div>
-
-  <!-- SUPABASE SETTINGS MODAL -->
-  <div class="modal-overlay" id="supabaseModal">
-    <div class="modal-card" style="max-width: 650px;">
-      <div class="modal-header">
-        <div class="modal-title-group">
-          <span style="font-size: 22px;">⚡</span>
-          <span class="modal-title">Supabase Cloud Database & Auth</span>
-        </div>
-        <button class="modal-close-btn">×</button>
-      </div>
-      <div class="modal-body">
-        <div style="display: flex; flex-direction: column; gap: 16px;">
-          <!-- Status Banner -->
-          <div id="supabaseStatusBanner" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-radius: var(--radius-sm); background: rgba(0, 229, 255, 0.08); border: 1px solid var(--border-glow);">
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <span id="supabaseStatusDot" style="width: 10px; height: 10px; border-radius: 50%; background: var(--cyan); display: inline-block;"></span>
-              <span id="supabaseStatusText" style="font-size: 13px; font-weight: 700; color: var(--text-primary);">Supabase Status: Checking...</span>
-            </div>
-            <button class="btn-editor-tool" id="testSupabaseConnBtn" type="button" style="border-color: var(--border-subtle);">⚡ Test Connection</button>
-          </div>
-
-          <!-- Configuration Form -->
-          <form id="supabaseConfigForm" style="display: flex; flex-direction: column; gap: 12px;">
-            <div style="display: flex; flex-direction: column; gap: 4px;">
-              <label for="supabaseUrlInput" style="font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Supabase Project URL</label>
-              <input type="url" id="supabaseUrlInput" placeholder="https://your-project.supabase.co" required
-                style="width: 100%; padding: 10px 14px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); color: var(--text-primary); font-family: var(--font-mono); font-size: 12px; outline: none;">
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 4px;">
-              <label for="supabaseKeyInput" style="font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Supabase Anon Public Key</label>
-              <input type="password" id="supabaseKeyInput" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6..." required
-                style="width: 100%; padding: 10px 14px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); color: var(--text-primary); font-family: var(--font-mono); font-size: 12px; outline: none;">
-            </div>
-
-            <div id="supabaseFeedbackMsg" style="font-size: 12px; min-height: 16px;"></div>
-
-            <div style="display: flex; gap: 10px;">
-              <button class="btn-submit" id="saveSupabaseConfigBtn" type="submit" style="flex: 1; justify-content: center; padding: 10px; font-size: 13px;">
-                💾 Save & Connect Supabase
-              </button>
-              <button class="btn-secondary" id="clearSupabaseConfigBtn" type="button" style="padding: 10px 16px; font-size: 13px;">
-                🗑️ Clear
-              </button>
-            </div>
-          </form>
-
-          <!-- SQL Setup Helper -->
-          <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 14px; margin-top: 4px;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-              <div style="font-size: 12px; font-weight: 700; color: var(--cyan); text-transform: uppercase;">📋 1-Click Database Setup (PostgreSQL)</div>
-              <button class="btn-editor-tool" id="copySqlSchemaBtn" type="button" style="color: var(--cyan); border-color: var(--cyan);">📋 Copy SQL</button>
-            </div>
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4;">
-              Run this SQL in your <strong>Supabase Dashboard → SQL Editor</strong> to create the <code>profiles</code> table:
-            </p>
-            <pre style="background: var(--bg-code); padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); max-height: 130px; overflow-y: auto; font-family: var(--font-mono); font-size: 11px; color: var(--text-code); line-height: 1.5;" id="sqlSchemaPre"></pre>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 

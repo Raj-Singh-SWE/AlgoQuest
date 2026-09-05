@@ -43,7 +43,17 @@ class AlgoQuestApp {
     // Update HUD
     this.updateHUD();
     this.updateQuestChain();
-    this.updateSupabaseStatusUI();
+
+    // Clean legacy pre-filled drafts so players only see clean boilerplate
+    if (localStorage.getItem('algoquest_clean_v') !== '3.5') {
+      for (let i = localStorage.length - 1; i >= 0; i--) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith('algoquest_draft_')) {
+          localStorage.removeItem(k);
+        }
+      }
+      localStorage.setItem('algoquest_clean_v', '3.5');
+    }
 
     // CodeCombat Startup Gate: Show Login / Title Screen on initial startup
     if (!sessionStorage.getItem('algoquest_entered')) {
@@ -620,13 +630,16 @@ class AlgoQuestApp {
     // Check for saved draft first
     let draft = localStorage.getItem(`algoquest_draft_${level.id}_${langId}`);
 
-    // If draft contains old pre-solved code, discard it so user starts with a clean empty template
+    // If draft contains old pre-solved code, discard it so user starts with clean empty boilerplate
     if (draft && (
       draft.includes('res[left], res[right] = res[right], res[left]') ||
       draft.includes('seen[complement]') ||
       draft.includes('diff in seen') ||
       draft.includes('first, second = second, first + second') ||
-      draft.includes('result = a + b')
+      draft.includes('result = a + b') ||
+      draft.includes('dp[x - coin]') ||
+      draft.includes('bisect_left') ||
+      draft.includes('curr = curr.next')
     )) {
       localStorage.removeItem(`algoquest_draft_${level.id}_${langId}`);
       draft = null;
@@ -634,12 +647,8 @@ class AlgoQuestApp {
 
     if (draft) {
       this.codeEditorEl.value = draft;
-    } else if (level.starterCodes && level.starterCodes[langId]) {
-      this.codeEditorEl.value = level.starterCodes[langId];
-    } else if (level.starterCode && langId === 'python') {
-      this.codeEditorEl.value = level.starterCode;
     } else {
-      this.codeEditorEl.value = `// ${langId} starter code not yet available for this quest.\n// Try solving it in Python first!`;
+      this.codeEditorEl.value = window.multiLangEngine ? window.multiLangEngine.getBoilerplate(level, langId) : (level.starterCode || '');
     }
     this.updateLineNumbers();
   }
@@ -786,7 +795,8 @@ class AlgoQuestApp {
     if (!this.currentLevel) return;
     const lang = window.multiLangEngine.getLanguage();
     localStorage.removeItem(`algoquest_draft_${this.currentLevel.id}_${lang}`);
-    this.loadEditorCode(this.currentLevel, lang);
+    this.codeEditorEl.value = window.multiLangEngine ? window.multiLangEngine.getBoilerplate(this.currentLevel, lang) : (this.currentLevel.starterCode || '');
+    this.updateLineNumbers();
     window.soundSystem?.playClick();
 
     // Visual feedback on button
@@ -802,7 +812,7 @@ class AlgoQuestApp {
       }, 1000);
     }
     if (window.dungeonArena) {
-      window.dungeonArena.showCombatText('Code Reset to Default', '#00e5ff');
+      window.dungeonArena.showCombatText('Code Reset to Boilerplate', '#00e5ff');
     }
   }
 

@@ -454,6 +454,41 @@ int main() {
       durationMs: (performance.now() - startTime).toFixed(1)
     };
   }
+
+  /**
+   * Generates clean, authentic boilerplate code stubs for any language.
+   */
+  getBoilerplate(level, langId = 'python') {
+    if (!level) return '';
+
+    // 1. If level has pre-defined starterCodes for this language, use it
+    if (level.starterCodes && level.starterCodes[langId]) {
+      return level.starterCodes[langId];
+    }
+    // 2. If python and level has starterCode
+    if (langId === 'python' && level.starterCode) {
+      return level.starterCode;
+    }
+
+    // Extract function name and arguments from Python starterCode
+    const pyCode = level.starterCode || '';
+    const fnMatch = pyCode.match(/def\s+(\w+)\s*\(([^)]*)\)/);
+    const fnName = fnMatch ? fnMatch[1] : 'solve';
+    const rawArgs = fnMatch ? fnMatch[2].split(',').map(a => a.trim().split(':')[0].trim()).filter(Boolean) : ['data'];
+    const argsStr = rawArgs.join(', ');
+
+    switch (langId) {
+      case 'javascript':
+        return `/**\n * ${level.title} - ${level.concept || ''}\n * ${level.prompt ? level.prompt : ''}\n */\nfunction ${fnName}(${argsStr}) {\n  // Write your solution here:\n  \n}\n`;
+      case 'java':
+        return `import java.util.*;\n\npublic class Solution {\n    /**\n     * ${level.title} - ${level.concept || ''}\n     */\n    public static Object ${fnName}(${rawArgs.map(a => 'Object ' + a).join(', ')}) {\n        // Write your solution here:\n        return null;\n    }\n}\n`;
+      case 'cpp':
+        return `#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\n\n/**\n * ${level.title} - ${level.concept || ''}\n */\nauto ${fnName}(${argsStr}) {\n    // Write your solution here:\n    return 0;\n}\n`;
+      case 'python':
+      default:
+        return `def ${fnName}(${argsStr}):\n    """\n    ${level.title} - ${level.concept || ''}\n    """\n    # Write your solution here:\n    pass\n`;
+    }
+  }
 }
 
 window.multiLangEngine = new MultiLangEngine();
