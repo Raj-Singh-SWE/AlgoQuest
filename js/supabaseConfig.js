@@ -7,7 +7,7 @@
 class SupabaseManager {
   constructor() {
     // Default / fallback credentials (can also be pasted into settings in-app)
-    this.defaultUrl = "https://YOUR_PROJECT_ID.supabase.co";
+    this.defaultUrl = "https://mytestproject.supabase.co";
     this.defaultAnonKey = "YOUR_SUPABASE_ANON_KEY";
 
     this.client = null;
