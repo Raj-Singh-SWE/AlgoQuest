@@ -1,0 +1,225 @@
+/* ==========================================================================
+   ALGOQUEST CODE EDITOR & EXECUTION PANEL
+   Editor Header Tabs, Line Numbers Gutter, Code Area, Action Bar & Terminal
+   ========================================================================== */
+
+.editor-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.editor-header-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(10, 14, 28, 0.95);
+}
+
+.tab-file {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.python-icon {
+  color: #3876af;
+}
+
+.editor-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-editor-tool {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-editor-tool:hover {
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Editor Body with Line Numbers & Textarea */
+.editor-wrapper {
+  position: relative;
+  display: flex;
+  background: var(--bg-code);
+  min-height: 300px;
+  flex: 1;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.line-numbers {
+  width: 44px;
+  padding: 14px 6px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 22px;
+  text-align: right;
+  color: var(--text-muted);
+  background: #04060e;
+  border-right: 1px solid var(--border-subtle);
+  user-select: none;
+}
+
+.code-textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #e2e8f0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 22px;
+  padding: 14px 16px;
+  resize: none;
+  outline: none;
+  tab-size: 4;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.code-textarea::selection {
+  background: rgba(0, 229, 255, 0.28);
+}
+
+/* Execution Action Bar */
+.editor-action-bar {
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(8, 12, 24, 0.95);
+}
+
+.engine-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.engine-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.engine-status-dot.ready {
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+}
+
+.engine-status-dot.failed {
+  background: var(--crimson);
+}
+
+.action-buttons-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-secondary {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-run {
+  background: rgba(0, 229, 255, 0.12);
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px 18px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.btn-run:hover {
+  background: var(--cyan);
+  color: #04091a;
+  box-shadow: 0 0 16px var(--cyan-glow);
+  transform: translateY(-1px);
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #00ff88 0%, #00bd60 100%);
+  border: none;
+  color: #04140a;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 13px;
+  padding: 8px 22px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 15px -2px rgba(0, 255, 136, 0.4);
+  transition: var(--transition);
+}
+
+.btn-submit:hover {
+  box-shadow: 0 6px 20px 0px rgba(0, 255, 136, 0.6);
+  transform: translateY(-2px);
+}
+
+/* STDOUT / Console Output Box */
+.stdout-box {
+  background: #050814;
+  color: var(--text-code);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.error-content {
+  color: var(--crimson) !important;
+}

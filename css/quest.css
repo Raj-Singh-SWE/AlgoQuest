@@ -1,0 +1,222 @@
+/* ==========================================================================
+   ALGOQUEST QUEST & LEARNING SYSTEM
+   Quest Chain Bar, Quest Story, Prompt Box, Teaching Blocks & Theory
+   ========================================================================== */
+
+/* Quest Chain Bar */
+.quest-chain-bar {
+  background: rgba(7, 10, 22, 0.75);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 8px 24px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.quest-chain-bar::-webkit-scrollbar {
+  height: 4px;
+}
+
+.quest-chain-bar::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 4px;
+}
+
+.quest-chain-inner {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  min-width: max-content;
+}
+
+.quest-chain-node {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quest-chain-node:hover .chain-dot {
+  transform: scale(1.25);
+  border-color: var(--cyan);
+}
+
+.chain-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: all 0.25s ease;
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+}
+
+.chain-connector {
+  width: 22px;
+  height: 2px;
+  background: var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.chain-completed .chain-dot {
+  background: linear-gradient(135deg, var(--green), #00cc66);
+  border-color: var(--green);
+  color: #050a14;
+  box-shadow: 0 0 10px var(--green-glow);
+}
+
+.chain-completed .chain-connector {
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green-glow);
+}
+
+.chain-current .chain-dot {
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  border-color: var(--cyan);
+  color: #fff;
+  box-shadow: 0 0 12px var(--cyan-glow);
+  animation: quest-chain-pulse 2s ease-in-out infinite;
+}
+
+/* Quest Story & Prompt Panel */
+.quest-panel {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quest-header-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.quest-title-large {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.quest-concept-pill {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cyan);
+  background: rgba(0, 229, 255, 0.1);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+}
+
+.quest-story-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-style: italic;
+  border-left: 3px solid var(--purple);
+  padding-left: 12px;
+  background: rgba(189, 0, 255, 0.05);
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.quest-prompt-box {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+}
+
+.quest-prompt-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.quest-prompt-desc {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* Teaching Block (for Learn Coding mode) */
+.teaching-block {
+  background: rgba(0, 229, 255, 0.04);
+  border: 1px solid rgba(0, 229, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.teaching-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.teaching-content {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.teaching-content code {
+  background: rgba(0, 255, 200, 0.12);
+  color: var(--text-code);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+/* Theory Markdown Box */
+.theory-box {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.theory-box h3 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--cyan);
+  margin: 10px 0 6px 0;
+}
+
+.theory-box code {
+  font-family: var(--font-mono);
+  background: rgba(0, 229, 255, 0.1);
+  color: var(--cyan);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.theory-box pre {
+  background: var(--bg-code);
+  border: 1px solid var(--border-subtle);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  margin: 10px 0;
+  overflow-x: auto;
+}
+
+.theory-box pre code {
+  background: transparent;
+  color: #fff;
+  padding: 0;
+}

@@ -1,0 +1,114 @@
+/* ==========================================================================
+   ALGOQUEST KEYFRAME ANIMATIONS & MICRO-INTERACTIONS
+   Combat physics, floating gems, pulsing bubbles & victory effects
+   ========================================================================== */
+
+@keyframes floatIcon {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes heroIdle {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(1deg);
+  }
+}
+
+@keyframes enemyIdle {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.03);
+  }
+}
+
+.hero-avatar {
+  animation: heroIdle 2.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.enemy-avatar {
+  animation: enemyIdle 3s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes lungeRight {
+  0% {
+    transform: translateX(0);
+  }
+  40% {
+    transform: translateX(65px) scale(1.15);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.attack-lunge-right {
+  animation: lungeRight 0.45s ease-in-out;
+}
+
+@keyframes hitShake {
+  10%, 90% {
+    transform: translate3d(-3px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(5px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-6px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(6px, 0, 0);
+  }
+}
+
+.hit-shake {
+  animation: hitShake 0.4s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+@keyframes pulseBubble {
+  0%, 100% {
+    border-color: rgba(0, 229, 255, 0.3);
+  }
+  50% {
+    border-color: rgba(0, 229, 255, 0.8);
+  }
+}
+
+@keyframes quest-chain-pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px var(--cyan-glow);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--cyan-glow), 0 0 30px var(--purple-glow);
+  }
+}
+
+@keyframes bounceTrophy {
+  from {
+    transform: translateY(0) scale(1);
+  }
+  to {
+    transform: translateY(-10px) scale(1.08);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

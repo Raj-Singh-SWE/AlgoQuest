@@ -1,0 +1,125 @@
+/* ==========================================================================
+   ALGOQUEST BATTLE ARENA & COMBAT SYSTEM
+   Arena Stage, Boss & Hero Avatars, Health Tracks, Versus Zone & Combat Log
+   ========================================================================== */
+
+.arena-panel {
+  background: radial-gradient(circle at 50% 40%, rgba(20, 28, 62, 0.6) 0%, rgba(10, 14, 28, 0.95) 100%);
+  border-color: rgba(0, 229, 255, 0.2);
+  position: relative;
+}
+
+.arena-stage {
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  min-height: 180px;
+}
+
+/* Combatants */
+.combatant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+  width: 140px;
+  text-align: center;
+}
+
+.combatant-avatar-wrap {
+  position: relative;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.combatant-avatar {
+  font-size: 52px;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.6));
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.combatant-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+/* Health Bar Tracks */
+.hp-bar-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hp-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.hp-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hp-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+
+.hero-hp-fill {
+  background: linear-gradient(90deg, #00e5ff, #00ff88);
+  box-shadow: 0 0 10px var(--green-glow);
+}
+
+.enemy-hp-fill {
+  background: linear-gradient(90deg, #ff3366, #ff7b00);
+  box-shadow: 0 0 10px var(--crimson-glow);
+}
+
+/* Versus Mid Zone */
+.arena-vs-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
+}
+
+.vs-badge {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 2px;
+}
+
+.combat-log-bubble {
+  background: rgba(9, 12, 26, 0.9);
+  border: 1px solid var(--border-glow);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  color: var(--cyan);
+  font-weight: 600;
+  max-width: 250px;
+  text-align: center;
+  box-shadow: 0 0 12px var(--cyan-glow);
+  animation: pulseBubble 2s infinite ease-in-out;
+}

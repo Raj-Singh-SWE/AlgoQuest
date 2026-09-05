@@ -1,0 +1,334 @@
+/* ==========================================================================
+   ALGOQUEST HEADER & NAVIGATION HUD
+   Header, Brand Logo, Mode Toggle, Language Selector, HUD Stats & Auth
+   ========================================================================== */
+
+.game-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(7, 10, 22, 0.92);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 10px 24px;
+}
+
+.header-inner {
+  max-width: 1700px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.brand-icon {
+  font-size: 26px;
+  filter: drop-shadow(0 0 10px var(--cyan));
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+.brand-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #ffffff 30%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-badge {
+  background: rgba(0, 229, 255, 0.12);
+  color: var(--cyan);
+  border: 1px solid var(--border-glow);
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Mode Toggle Group (DSA Quests ↔ Learn Coding) */
+.mode-toggle-group {
+  display: flex;
+  background: rgba(10, 15, 32, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  gap: 3px;
+}
+
+.mode-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.mode-toggle-btn.active {
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  color: #fff;
+  box-shadow: 0 2px 10px var(--cyan-glow);
+}
+
+.mode-toggle-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+}
+
+/* Language Selector */
+.lang-selector {
+  display: flex;
+  gap: 3px;
+  background: rgba(10, 15, 32, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 3px;
+}
+
+.lang-pill {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 11px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.lang-pill:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text-secondary);
+}
+
+.lang-pill.active[data-lang="python"] {
+  background: linear-gradient(135deg, #3572A5, #4B8BBE);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(53, 114, 165, 0.5);
+}
+
+.lang-pill.active[data-lang="javascript"] {
+  background: linear-gradient(135deg, #f0db4f, #e8a600);
+  color: #121212;
+  box-shadow: 0 2px 10px rgba(240, 219, 79, 0.5);
+}
+
+.lang-pill.active[data-lang="java"] {
+  background: linear-gradient(135deg, #b07219, #ed8b00);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(176, 114, 25, 0.5);
+}
+
+.lang-pill.active[data-lang="cpp"] {
+  background: linear-gradient(135deg, #f34b7d, #659ad2);
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(243, 75, 125, 0.5);
+}
+
+/* Realm Selector Pill */
+.current-realm-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+  font-size: 13px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.current-realm-badge:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 15px var(--cyan-glow);
+  transform: translateY(-1px);
+}
+
+.realm-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+}
+
+/* Player HUD Stats */
+.hud-stats {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.hud-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hud-stat-item.gold {
+  color: var(--gold);
+  border-color: rgba(255, 183, 3, 0.3);
+}
+
+.xp-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 140px;
+}
+
+.xp-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.xp-bar-bg {
+  width: 100%;
+  height: 7px;
+  background: #10152b;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.xp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  box-shadow: 0 0 10px var(--cyan-glow);
+  border-radius: var(--radius-full);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Quick Action Nav Buttons */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-icon-hud {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-icon-hud:hover {
+  color: var(--text-primary);
+  border-color: var(--cyan);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+.btn-icon-hud.active {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan-glow);
+}
+
+.btn-primary-hud {
+  background: linear-gradient(135deg, #00e5ff 0%, #0088ff 100%);
+  color: #04091a;
+  border: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px -2px rgba(0, 229, 255, 0.4);
+}
+
+.btn-primary-hud:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px 0px rgba(0, 229, 255, 0.6);
+}
+
+/* Auth Section */
+.auth-section {
+  position: relative;
+}
+
+.btn-auth-login {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-auth-login:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan-glow);
+}
+
+.auth-avatar-placeholder {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.auth-avatar-placeholder img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}

@@ -1,0 +1,124 @@
+/* ==========================================================================
+   ALGOQUEST TEST SUITE & EXECUTION RESULTS
+   Test Results Drawer, Tabs, Verdict Banner, IO Grids & Execution Diffs
+   ========================================================================== */
+
+.results-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.test-tabs-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(8, 11, 24, 0.95);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow-x: auto;
+}
+
+.test-tab-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.test-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.test-tab-btn.active {
+  background: #111730;
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+.test-tab-btn.tab-passed {
+  border-left: 3px solid var(--green);
+}
+
+.test-tab-btn.tab-failed {
+  border-left: 3px solid var(--crimson);
+}
+
+.test-detail-body {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 140px;
+}
+
+.test-verdict-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.banner-passed {
+  background: rgba(0, 255, 136, 0.12);
+  color: var(--green);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.banner-failed {
+  background: rgba(255, 51, 102, 0.12);
+  color: var(--crimson);
+  border: 1px solid rgba(255, 51, 102, 0.3);
+}
+
+.test-io-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .test-io-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.test-io-box {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.io-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.io-content {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-code);
+  word-break: break-all;
+}
+
+.io-content.error-content {
+  color: var(--crimson);
+}

@@ -1,0 +1,34 @@
+/* ==========================================================================
+   ALGOQUEST: THE MULTI-LANGUAGE CODING ODYSSEY
+   Master Modular Stylesheet Entrypoint
+   ========================================================================== */
+
+/* 1. Design Tokens, Colors & Root Variables */
+@import url('variables.css');
+
+/* 2. Global Reset, Typography, Layout Grid & Glass Panels */
+@import url('base.css');
+
+/* 3. Top Header, HUD, Mode Toggle, Language Selector & Auth */
+@import url('header.css');
+
+/* 4. Battle Arena, Hero & Enemy Stage, Health Bars, Combat Log */
+@import url('arena.css');
+
+/* 5. Quest Progression Chain, Story Panels & Teaching Blocks */
+@import url('quest.css');
+
+/* 6. Algorithm Visualizer (Arrays, Trees, Graphs, Stacks, DP) */
+@import url('visualizer.css');
+
+/* 7. Code Editor, Line Numbers, Buttons & Terminal */
+@import url('editor.css');
+
+/* 8. Test Suite Results Drawer, Test Tabs & Assertion Diffs */
+@import url('tests.css');
+
+/* 9. Modals (Realm Map, Relics, Victory, Google Sign-in, Profile) */
+@import url('modals.css');
+
+/* 10. Keyframe Animations & Micro-Interactions */
+@import url('animations.css');
