@@ -194,3 +194,243 @@
   box-shadow: 0 0 12px var(--cyan-glow);
   animation: pulseBubble 2s infinite ease-in-out;
 }
+
+/* ==========================================================================
+   CODECOMBAT STORY BRIEFING & DIALOGUE CUTSCENE STYLES
+   ========================================================================== */
+
+.story-dialogue-card {
+  max-width: 620px;
+  background: radial-gradient(circle at 50% 20%, #151b33 0%, #0c1022 100%);
+  border: 2px solid rgba(255, 183, 3, 0.4);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 183, 3, 0.15);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.story-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(9, 12, 26, 0.9);
+  border-bottom: 1px solid rgba(255, 183, 3, 0.2);
+}
+
+.story-speaker-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.speaker-avatar {
+  font-size: 40px;
+  filter: drop-shadow(0 0 12px rgba(255, 183, 3, 0.5));
+  animation: floatSpeaker 3s infinite ease-in-out;
+}
+
+@keyframes floatSpeaker {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.speaker-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.speaker-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+
+.speaker-title {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.story-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.story-scroll-frame {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+}
+
+.story-chapter-tag {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+
+.story-quest-heading {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 14px 0;
+}
+
+.story-dialogue-bubble {
+  position: relative;
+  background: rgba(20, 26, 52, 0.7);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+}
+
+.dialogue-quote-mark {
+  position: absolute;
+  top: -10px;
+  left: 8px;
+  font-size: 32px;
+  color: rgba(255, 183, 3, 0.3);
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+.story-dialogue-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #e2e8f0;
+  font-style: italic;
+  min-height: 50px;
+}
+
+/* Objectives Box */
+.story-objectives-box {
+  background: rgba(0, 229, 255, 0.05);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 14px;
+}
+
+.objectives-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.objectives-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.objectives-list li {
+  font-size: 13px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.objectives-list li span {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0, 229, 255, 0.2);
+  color: var(--cyan);
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Enemy Dossier */
+.story-dossier {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(255, 51, 102, 0.08);
+  border: 1px solid rgba(255, 51, 102, 0.25);
+  border-radius: var(--radius-sm);
+}
+
+.dossier-avatar {
+  font-size: 28px;
+}
+
+.dossier-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.dossier-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #ff3366;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dossier-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.dossier-threat {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* Footer Actions */
+.story-footer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 4px;
+}
+
+.story-autoshow-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.story-begin-btn {
+  padding: 12px 28px;
+  font-size: 15px;
+  background: linear-gradient(135deg, #ffb703, #ff7b00);
+  color: #000;
+  font-weight: 800;
+  border: none;
+  box-shadow: 0 4px 18px rgba(255, 183, 3, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.story-begin-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255, 183, 3, 0.6);
+}
+

@@ -63,29 +63,22 @@ Variables let you **reuse** values, **update** them, and **pass** them to functi
     Return the sum of two integers.
     Example: add_numbers(3, 5) -> 8
     """
-    # Store the result in a variable and return it
-    result = a + b
-    return result
+    # Write your solution here:
+    pass
 `,
       javascript: `function addNumbers(a, b) {
   // Return the sum of two integers
-  // Example: addNumbers(3, 5) -> 8
-  const result = a + b;
-  return result;
+  // Write your solution here:
 }
 `,
       java: `public static int addNumbers(int a, int b) {
-    // Return the sum of two integers
-    // Example: addNumbers(3, 5) -> 8
-    int result = a + b;
-    return result;
+    // Write your solution here:
+    return 0;
 }
 `,
       cpp: `int addNumbers(int a, int b) {
-    // Return the sum of two integers
-    // Example: addNumbers(3, 5) -> 8
-    int result = a + b;
-    return result;
+    // Write your solution here:
+    return 0;
 }
 `
     },
@@ -143,30 +136,22 @@ else:
     """
     Return "positive", "negative", or "zero" based on the input number.
     """
-    if n > 0:
-        return "positive"
-    elif n < 0:
-        return "negative"
-    else:
-        return "zero"
+    # Write your solution here:
+    pass
 `,
       javascript: `function classifyNumber(n) {
   // Return "positive", "negative", or "zero"
-  if (n > 0) return "positive";
-  else if (n < 0) return "negative";
-  else return "zero";
+  // Write your solution here:
 }
 `,
       java: `public static String classifyNumber(int n) {
-    if (n > 0) return "positive";
-    else if (n < 0) return "negative";
-    else return "zero";
+    // Write your solution here:
+    return "";
 }
 `,
       cpp: `string classifyNumber(int n) {
-    if (n > 0) return "positive";
-    else if (n < 0) return "negative";
-    else return "zero";
+    // Write your solution here:
+    return "";
 }
 `
     },
@@ -218,39 +203,26 @@ Loops repeat a block of code multiple times.
 - **Continue**: Skip the current iteration`,
     prompt: 'Write a function that returns the sum of all integers from 1 to n (inclusive).',
     starterCodes: {
-      python: `def sum_to_n(n: int) -> int:
+      python: `def sum_up_to(n: int) -> int:
     """
-    Return the sum of all integers from 1 to n (inclusive).
-    Example: sum_to_n(5) -> 15 (1+2+3+4+5)
+    Return the sum of all integers from 1 to n inclusive.
+    Example: sum_up_to(5) -> 1 + 2 + 3 + 4 + 5 = 15
     """
-    total = 0
-    for i in range(1, n + 1):
-        total += i
-    return total
+    # Write your solution here:
+    pass
 `,
-      javascript: `function sumToN(n) {
-  // Return sum of 1 to n inclusive
-  let total = 0;
-  for (let i = 1; i <= n; i++) {
-    total += i;
-  }
-  return total;
+      javascript: `function sumUpTo(n) {
+  // Write your solution here:
 }
 `,
-      java: `public static int sumToN(int n) {
-    int total = 0;
-    for (int i = 1; i <= n; i++) {
-        total += i;
-    }
-    return total;
+      java: `public static int sumUpTo(int n) {
+    // Write your solution here:
+    return 0;
 }
 `,
-      cpp: `int sumToN(int n) {
-    int total = 0;
-    for (int i = 1; i <= n; i++) {
-        total += i;
-    }
-    return total;
+      cpp: `int sumUpTo(int n) {
+    // Write your solution here:
+    return 0;
 }
 `
     },
@@ -289,40 +261,26 @@ Loops repeat a block of code multiple times.
     story: 'The ancient Spell Tome teaches you to define reusable spells (functions). Each spell takes ingredients (parameters) and produces a result (return value).',
     prompt: 'Write a function that checks if a number is prime. Return True/true if prime, False/false otherwise.',
     starterCodes: {
-      python: `def is_prime(n: int) -> bool:
+      python: `def is_even(n: int) -> bool:
     """
-    Return True if n is a prime number, False otherwise.
-    A prime is > 1 and divisible only by 1 and itself.
+    Return True if n is even, False otherwise.
+    Example: is_even(4) -> True, is_even(7) -> False
     """
-    if n < 2:
-        return False
-    for i in range(2, int(n ** 0.5) + 1):
-        if n % i == 0:
-            return False
-    return True
+    # Write your solution here:
+    pass
 `,
-      javascript: `function isPrime(n) {
-  if (n < 2) return false;
-  for (let i = 2; i <= Math.sqrt(n); i++) {
-    if (n % i === 0) return false;
-  }
-  return true;
+      javascript: `function isEven(n) {
+  // Write your solution here:
 }
 `,
-      java: `public static boolean isPrime(int n) {
-    if (n < 2) return false;
-    for (int i = 2; i <= Math.sqrt(n); i++) {
-        if (n % i == 0) return false;
-    }
-    return true;
+      java: `public static boolean isEven(int n) {
+    // Write your solution here:
+    return false;
 }
 `,
-      cpp: `bool isPrime(int n) {
-    if (n < 2) return false;
-    for (int i = 2; i * i <= n; i++) {
-        if (n % i == 0) return false;
-    }
-    return true;
+      cpp: `bool isEven(int n) {
+    // Write your solution here:
+    return false;
 }
 `
     },
@@ -362,29 +320,26 @@ Loops repeat a block of code multiple times.
     story: 'The Cipher Shade speaks in encoded strings. Learn to manipulate, reverse, and transform text to break its cipher.',
     prompt: 'Write a function that checks if a string is a palindrome (reads the same forwards and backwards). Ignore case.',
     starterCodes: {
-      python: `def is_palindrome(s: str) -> bool:
+      python: `def reverse_string(s: str) -> str:
     """
-    Check if a string is a palindrome (case-insensitive).
-    Example: is_palindrome("Racecar") -> True
+    Return the reversed string.
+    Example: reverse_string("algo") -> "ogla"
     """
-    s = s.lower()
-    return s == s[::-1]
+    # Write your solution here:
+    pass
 `,
-      javascript: `function isPalindrome(s) {
-  s = s.toLowerCase();
-  return s === s.split('').reverse().join('');
+      javascript: `function reverseString(s) {
+  // Write your solution here:
 }
 `,
-      java: `public static boolean isPalindrome(String s) {
-    s = s.toLowerCase();
-    return s.equals(new StringBuilder(s).reverse().toString());
+      java: `public static String reverseString(String s) {
+    // Write your solution here:
+    return "";
 }
 `,
-      cpp: `bool isPalindrome(string s) {
-    transform(s.begin(), s.end(), s.begin(), ::tolower);
-    string rev = s;
-    reverse(rev.begin(), rev.end());
-    return s == rev;
+      cpp: `string reverseString(string s) {
+    // Write your solution here:
+    return "";
 }
 `
     },
@@ -426,44 +381,26 @@ Loops repeat a block of code multiple times.
     story: 'Arrays are the fundamental collection — ordered sequences of values. The Swarm Commander challenges you to find the maximum value in an array without using built-in max functions.',
     prompt: 'Write a function that finds and returns the maximum value in an array of integers.',
     starterCodes: {
-      python: `def find_max(arr: list) -> int:
+      python: `def find_max(nums: list[int]) -> int:
     """
-    Find and return the maximum value in the array.
-    Do NOT use the built-in max() function.
+    Return the maximum number in the non-empty list.
+    Example: find_max([3, 7, 2, 9, 1]) -> 9
     """
-    if not arr:
-        return 0
-    max_val = arr[0]
-    for num in arr:
-        if num > max_val:
-            max_val = num
-    return max_val
+    # Write your solution here:
+    pass
 `,
-      javascript: `function findMax(arr) {
-  if (arr.length === 0) return 0;
-  let maxVal = arr[0];
-  for (const num of arr) {
-    if (num > maxVal) maxVal = num;
-  }
-  return maxVal;
+      javascript: `function findMax(nums) {
+  // Write your solution here:
 }
 `,
-      java: `public static int findMax(int[] arr) {
-    if (arr.length == 0) return 0;
-    int maxVal = arr[0];
-    for (int num : arr) {
-        if (num > maxVal) maxVal = num;
-    }
-    return maxVal;
+      java: `public static int findMax(int[] nums) {
+    // Write your solution here:
+    return 0;
 }
 `,
-      cpp: `int findMax(vector<int> arr) {
-    if (arr.empty()) return 0;
-    int maxVal = arr[0];
-    for (int num : arr) {
-        if (num > maxVal) maxVal = num;
-    }
-    return maxVal;
+      cpp: `int findMax(vector<int> nums) {
+    // Write your solution here:
+    return 0;
 }
 `
     },
@@ -502,38 +439,26 @@ Loops repeat a block of code multiple times.
     story: 'Hash maps (dictionaries, objects, maps) store key-value pairs for lightning-fast lookups. The Key Master challenges you to count character frequencies.',
     prompt: 'Write a function that counts the frequency of each character in a string and returns a dictionary/object/map.',
     starterCodes: {
-      python: `def char_frequency(s: str) -> dict:
+      python: `def count_frequencies(words: list[str]) -> dict:
     """
-    Count the frequency of each character.
-    Example: char_frequency("aab") -> {"a": 2, "b": 1}
+    Return a dictionary mapping each word to how many times it appears.
+    Example: ["cat", "dog", "cat"] -> {"cat": 2, "dog": 1}
     """
-    freq = {}
-    for ch in s:
-        freq[ch] = freq.get(ch, 0) + 1
-    return freq
+    # Write your solution here:
+    pass
 `,
-      javascript: `function charFrequency(s) {
-  const freq = {};
-  for (const ch of s) {
-    freq[ch] = (freq[ch] || 0) + 1;
-  }
-  return freq;
+      javascript: `function countFrequencies(words) {
+  // Write your solution here:
 }
 `,
-      java: `public static Map<Character, Integer> charFrequency(String s) {
-    Map<Character, Integer> freq = new HashMap<>();
-    for (char ch : s.toCharArray()) {
-        freq.put(ch, freq.getOrDefault(ch, 0) + 1);
-    }
-    return freq;
+      java: `public static Map<String, Integer> countFrequencies(String[] words) {
+    // Write your solution here:
+    return new HashMap<>();
 }
 `,
-      cpp: `map<char, int> charFrequency(string s) {
-    map<char, int> freq;
-    for (char ch : s) {
-        freq[ch]++;
-    }
-    return freq;
+      cpp: `map<string, int> countFrequencies(vector<string> words) {
+    // Write your solution here:
+    return {};
 }
 `
     },
@@ -571,39 +496,26 @@ Loops repeat a block of code multiple times.
     story: 'The Grid Warden protects a 2D matrix. You must use nested loops to traverse rows and columns and flatten a 2D array into a single list.',
     prompt: 'Write a function that takes a 2D array (list of lists) and returns a flattened 1D array.',
     starterCodes: {
-      python: `def flatten(matrix: list) -> list:
+      python: `def matrix_diagonal_sum(mat: list[list[int]]) -> int:
     """
-    Flatten a 2D list into a 1D list.
-    Example: [[1,2],[3,4]] -> [1,2,3,4]
+    Return the sum of the primary diagonal elements of a square matrix.
+    Example: [[1, 2], [3, 4]] -> 1 + 4 = 5
     """
-    result = []
-    for row in matrix:
-        for val in row:
-            result.append(val)
-    return result
+    # Write your solution here:
+    pass
 `,
-      javascript: `function flatten(matrix) {
-  const result = [];
-  for (const row of matrix) {
-    for (const val of row) {
-      result.push(val);
-    }
-  }
-  return result;
+      javascript: `function matrixDiagonalSum(mat) {
+  // Write your solution here:
 }
 `,
-      java: `public static int[] flatten(int[][] matrix) {
-    List<Integer> list = new ArrayList<>();
-    for (int[] row : matrix)
-        for (int val : row) list.add(val);
-    return list.stream().mapToInt(i -> i).toArray();
+      java: `public static int matrixDiagonalSum(int[][] mat) {
+    // Write your solution here:
+    return 0;
 }
 `,
-      cpp: `vector<int> flatten(vector<vector<int>> matrix) {
-    vector<int> result;
-    for (auto& row : matrix)
-        for (int val : row) result.push_back(val);
-    return result;
+      cpp: `int matrixDiagonalSum(vector<vector<int>> mat) {
+    // Write your solution here:
+    return 0;
 }
 `
     },
@@ -643,27 +555,24 @@ Loops repeat a block of code multiple times.
     starterCodes: {
       python: `def factorial(n: int) -> int:
     """
-    Compute n! recursively.
+    Calculate n! using recursion.
     Example: factorial(5) -> 120
-    Base case: factorial(0) = 1
     """
-    if n <= 1:
-        return 1
-    return n * factorial(n - 1)
+    # Write your solution here:
+    pass
 `,
       javascript: `function factorial(n) {
-  if (n <= 1) return 1;
-  return n * factorial(n - 1);
+  // Write your solution here:
 }
 `,
       java: `public static int factorial(int n) {
-    if (n <= 1) return 1;
-    return n * factorial(n - 1);
+    // Write your solution here:
+    return 1;
 }
 `,
       cpp: `int factorial(int n) {
-    if (n <= 1) return 1;
-    return n * factorial(n - 1);
+    // Write your solution here:
+    return 1;
 }
 `
     },
@@ -702,46 +611,31 @@ Loops repeat a block of code multiple times.
     story: 'Object-Oriented Programming lets you bundle data and behavior into reusable blueprints called classes. Create a simple counter class.',
     prompt: 'Create a function that simulates a counter: given a list of operations ["inc", "inc", "dec", "get"], return the final counter value. Start at 0, inc adds 1, dec subtracts 1.',
     starterCodes: {
-      python: `def run_counter(operations: list) -> int:
-    """
-    Simulate a counter starting at 0.
-    "inc" -> +1, "dec" -> -1, "get" -> no change
-    Return final value.
-    """
-    count = 0
-    for op in operations:
-        if op == "inc":
-            count += 1
-        elif op == "dec":
-            count -= 1
-    return count
+      python: `class Hero:
+    def __init__(self, name: str, hp: int):
+        # Initialize hero attributes:
+        pass
+
+    def take_damage(self, amount: int) -> int:
+        # Subtract damage from hp (minimum 0) and return new hp:
+        pass
 `,
-      javascript: `function runCounter(operations) {
-  let count = 0;
-  for (const op of operations) {
-    if (op === "inc") count++;
-    else if (op === "dec") count--;
+      javascript: `class Hero {
+  constructor(name, hp) {
+    // Write your solution here:
   }
-  return count;
+  takeDamage(amount) {
+    // Write your solution here:
+  }
 }
 `,
-      java: `public static int runCounter(String[] operations) {
-    int count = 0;
-    for (String op : operations) {
-        if (op.equals("inc")) count++;
-        else if (op.equals("dec")) count--;
-    }
-    return count;
+      java: `class Hero {
+    // Write your solution here:
 }
 `,
-      cpp: `int runCounter(vector<string> operations) {
-    int count = 0;
-    for (auto& op : operations) {
-        if (op == "inc") count++;
-        else if (op == "dec") count--;
-    }
-    return count;
-}
+      cpp: `class Hero {
+    // Write your solution here:
+};
 `
     },
     functionNames: { python: 'run_counter', javascript: 'runCounter', java: 'runCounter', cpp: 'runCounter' },
@@ -782,28 +676,25 @@ Loops repeat a block of code multiple times.
     story: 'Errors crash programs. Exception handling lets you gracefully recover. Write a safe division function that returns -1 on division by zero instead of crashing.',
     prompt: 'Write a function that divides a by b. If b is 0, return -1 instead of crashing.',
     starterCodes: {
-      python: `def safe_divide(a: int, b: int) -> int:
+      python: `def safe_divide(a: int, b: int) -> float:
     """
-    Return a // b (integer division). If b is 0, return -1.
+    Divide a by b. If b is 0, catch the exception and return -1.
     """
-    try:
-        return a // b
-    except ZeroDivisionError:
-        return -1
+    # Write your solution here:
+    pass
 `,
       javascript: `function safeDivide(a, b) {
-  if (b === 0) return -1;
-  return Math.floor(a / b);
+  // Write your solution here:
 }
 `,
-      java: `public static int safeDivide(int a, int b) {
-    if (b == 0) return -1;
-    return a / b;
+      java: `public static double safeDivide(int a, int b) {
+    // Write your solution here:
+    return -1;
 }
 `,
-      cpp: `int safeDivide(int a, int b) {
-    if (b == 0) return -1;
-    return a / b;
+      cpp: `double safeDivide(int a, int b) {
+    // Write your solution here:
+    return -1;
 }
 `
     },
@@ -842,30 +733,26 @@ Loops repeat a block of code multiple times.
     story: 'Higher-order functions accept or return other functions. Use map/filter patterns to transform data elegantly.',
     prompt: 'Write a function that takes a list of integers and returns a new list containing only the even numbers, each doubled.',
     starterCodes: {
-      python: `def filter_double_evens(nums: list) -> list:
+      python: `def double_evens(nums: list[int]) -> list[int]:
     """
-    Filter even numbers and double each one.
-    Example: [1,2,3,4,5] -> [4, 8]
+    Return a new list containing only even numbers, each doubled.
+    Example: [1, 2, 3, 4] -> [4, 8]
     """
-    return [x * 2 for x in nums if x % 2 == 0]
+    # Write your solution here:
+    pass
 `,
-      javascript: `function filterDoubleEvens(nums) {
-  return nums.filter(x => x % 2 === 0).map(x => x * 2);
+      javascript: `function doubleEvens(nums) {
+  // Write your solution here:
 }
 `,
-      java: `public static int[] filterDoubleEvens(int[] nums) {
-    return java.util.Arrays.stream(nums)
-        .filter(x -> x % 2 == 0)
-        .map(x -> x * 2)
-        .toArray();
+      java: `public static int[] doubleEvens(int[] nums) {
+    // Write your solution here:
+    return new int[]{};
 }
 `,
-      cpp: `vector<int> filterDoubleEvens(vector<int> nums) {
-    vector<int> result;
-    for (int x : nums) {
-        if (x % 2 == 0) result.push_back(x * 2);
-    }
-    return result;
+      cpp: `vector<int> doubleEvens(vector<int> nums) {
+    // Write your solution here:
+    return {};
 }
 `
     },
@@ -904,49 +791,26 @@ Loops repeat a block of code multiple times.
     story: 'Implement Bubble Sort: repeatedly swap adjacent elements that are out of order until the array is sorted.',
     prompt: 'Write a function that sorts an array using bubble sort and returns the sorted array.',
     starterCodes: {
-      python: `def bubble_sort(arr: list) -> list:
+      python: `def sort_by_length(words: list[str]) -> list[str]:
     """
-    Sort an array using bubble sort.
-    Example: [5, 3, 8, 1] -> [1, 3, 5, 8]
+    Sort words in ascending order of their length.
+    Example: ["banana", "apple", "pie"] -> ["pie", "apple", "banana"]
     """
-    arr = list(arr)
-    n = len(arr)
-    for i in range(n):
-        for j in range(0, n - i - 1):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-    return arr
+    # Write your solution here:
+    pass
 `,
-      javascript: `function bubbleSort(arr) {
-  arr = [...arr];
-  const n = arr.length;
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < n - i - 1; j++) {
-      if (arr[j] > arr[j + 1]) {
-        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
-      }
-    }
-  }
-  return arr;
+      javascript: `function sortByLength(words) {
+  // Write your solution here:
 }
 `,
-      java: `public static int[] bubbleSort(int[] arr) {
-    arr = arr.clone();
-    int n = arr.length;
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < n - i - 1; j++)
-            if (arr[j] > arr[j + 1]) {
-                int tmp = arr[j]; arr[j] = arr[j+1]; arr[j+1] = tmp;
-            }
-    return arr;
+      java: `public static String[] sortByLength(String[] words) {
+    // Write your solution here:
+    return new String[]{};
 }
 `,
-      cpp: `vector<int> bubbleSort(vector<int> arr) {
-    int n = arr.size();
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < n - i - 1; j++)
-            if (arr[j] > arr[j + 1]) swap(arr[j], arr[j + 1]);
-    return arr;
+      cpp: `vector<string> sortByLength(vector<string> words) {
+    // Write your solution here:
+    return {};
 }
 `
     },
@@ -985,53 +849,26 @@ Loops repeat a block of code multiple times.
     story: 'The legendary coding interview challenge. For numbers 1 to n, return "Fizz" for multiples of 3, "Buzz" for 5, "FizzBuzz" for both, and the number itself otherwise.',
     prompt: 'Write a function that takes n and returns a list of FizzBuzz results from 1 to n.',
     starterCodes: {
-      python: `def fizzbuzz(n: int) -> list:
+      python: `def fizzbuzz(n: int) -> list[str]:
     """
-    Return FizzBuzz results for numbers 1 to n.
+    Return strings 1 to n: multiples of 3 -> "Fizz", 5 -> "Buzz", both -> "FizzBuzz".
+    Example: 5 -> ["1", "2", "Fizz", "4", "Buzz"]
     """
-    result = []
-    for i in range(1, n + 1):
-        if i % 15 == 0:
-            result.append("FizzBuzz")
-        elif i % 3 == 0:
-            result.append("Fizz")
-        elif i % 5 == 0:
-            result.append("Buzz")
-        else:
-            result.append(str(i))
-    return result
+    # Write your solution here:
+    pass
 `,
       javascript: `function fizzbuzz(n) {
-  const result = [];
-  for (let i = 1; i <= n; i++) {
-    if (i % 15 === 0) result.push("FizzBuzz");
-    else if (i % 3 === 0) result.push("Fizz");
-    else if (i % 5 === 0) result.push("Buzz");
-    else result.push(String(i));
-  }
-  return result;
+  // Write your solution here:
 }
 `,
       java: `public static String[] fizzbuzz(int n) {
-    String[] result = new String[n];
-    for (int i = 1; i <= n; i++) {
-        if (i % 15 == 0) result[i-1] = "FizzBuzz";
-        else if (i % 3 == 0) result[i-1] = "Fizz";
-        else if (i % 5 == 0) result[i-1] = "Buzz";
-        else result[i-1] = String.valueOf(i);
-    }
-    return result;
+    // Write your solution here:
+    return new String[]{};
 }
 `,
       cpp: `vector<string> fizzbuzz(int n) {
-    vector<string> result;
-    for (int i = 1; i <= n; i++) {
-        if (i % 15 == 0) result.push_back("FizzBuzz");
-        else if (i % 3 == 0) result.push_back("Fizz");
-        else if (i % 5 == 0) result.push_back("Buzz");
-        else result.push_back(to_string(i));
-    }
-    return result;
+    // Write your solution here:
+    return {};
 }
 `
     },
@@ -1069,51 +906,25 @@ Loops repeat a block of code multiple times.
     story: 'The Oracle demands logarithmic efficiency. Implement binary search on a sorted array to find a target element. Return its index, or -1 if not found.',
     prompt: 'Write a binary search function that returns the index of target in a sorted array, or -1 if not found.',
     starterCodes: {
-      python: `def binary_search(arr: list, target: int) -> int:
+      python: `def binary_search(nums: list[int], target: int) -> int:
     """
-    Binary search in sorted array. Return index of target, or -1.
+    Search for target in sorted nums. Return index or -1 if not found.
+    Must run in O(log N) time!
     """
-    left, right = 0, len(arr) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        if arr[mid] == target:
-            return mid
-        elif arr[mid] < target:
-            left = mid + 1
-        else:
-            right = mid - 1
-    return -1
+    # Write your solution here:
+    pass
 `,
-      javascript: `function binarySearch(arr, target) {
-  let left = 0, right = arr.length - 1;
-  while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
-    if (arr[mid] === target) return mid;
-    else if (arr[mid] < target) left = mid + 1;
-    else right = mid - 1;
-  }
-  return -1;
+      javascript: `function binarySearch(nums, target) {
+  // Write your solution here:
 }
 `,
-      java: `public static int binarySearch(int[] arr, int target) {
-    int left = 0, right = arr.length - 1;
-    while (left <= right) {
-        int mid = (left + right) / 2;
-        if (arr[mid] == target) return mid;
-        else if (arr[mid] < target) left = mid + 1;
-        else right = mid - 1;
-    }
+      java: `public static int binarySearch(int[] nums, int target) {
+    // Write your solution here:
     return -1;
 }
 `,
-      cpp: `int binarySearch(vector<int> arr, int target) {
-    int left = 0, right = arr.size() - 1;
-    while (left <= right) {
-        int mid = (left + right) / 2;
-        if (arr[mid] == target) return mid;
-        else if (arr[mid] < target) left = mid + 1;
-        else right = mid - 1;
-    }
+      cpp: `int binarySearch(vector<int> nums, int target) {
+    // Write your solution here:
     return -1;
 }
 `

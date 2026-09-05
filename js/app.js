@@ -44,6 +44,15 @@ class AlgoQuestApp {
     this.updateHUD();
     this.updateQuestChain();
     this.updateSupabaseStatusUI();
+
+    // CodeCombat Startup Gate: Show Login / Title Screen on initial startup
+    if (!sessionStorage.getItem('algoquest_entered')) {
+      if (this.loginModal) {
+        this.loginModal.classList.add('active');
+      }
+    } else if (window.storyDialogue && this.currentLevel) {
+      window.storyDialogue.showBriefing(this.currentLevel);
+    }
   }
 
   loadPlayerData() {
@@ -267,8 +276,23 @@ class AlgoQuestApp {
     }
 
     document.getElementById('guestContinueBtn').addEventListener('click', () => {
+      sessionStorage.setItem('algoquest_entered', 'true');
       this.loginModal.classList.remove('active');
+      window.soundSystem?.playSuccess();
+      if (window.storyDialogue && this.currentLevel) {
+        window.storyDialogue.showBriefing(this.currentLevel);
+      }
     });
+
+    const storyBtn = document.getElementById('questStoryBriefingBtn');
+    if (storyBtn) {
+      storyBtn.addEventListener('click', () => {
+        if (window.storyDialogue && this.currentLevel) {
+          window.storyDialogue.showBriefing(this.currentLevel, true);
+        }
+      });
+    }
+
     document.getElementById('signOutBtn').addEventListener('click', () => this.doSignOut());
 
     // Supabase Events
@@ -443,8 +467,13 @@ class AlgoQuestApp {
         this.loadEditorCode(this.currentLevel, window.multiLangEngine.getLanguage());
       }
 
+      sessionStorage.setItem('algoquest_entered', 'true');
       this.loginModal.classList.remove('active');
       window.soundSystem?.playSuccess();
+
+      if (window.storyDialogue && this.currentLevel) {
+        window.storyDialogue.showBriefing(this.currentLevel);
+      }
     } catch (err) {
       if (status) status.innerHTML = `<span style="color:var(--crimson);">${err.message}</span>`;
     }
@@ -465,18 +494,27 @@ class AlgoQuestApp {
         this.loadEditorCode(this.currentLevel, window.multiLangEngine.getLanguage());
       }
 
+      sessionStorage.setItem('algoquest_entered', 'true');
       this.loginModal.classList.remove('active');
       window.soundSystem?.playSuccess();
+
+      if (window.storyDialogue && this.currentLevel) {
+        window.storyDialogue.showBriefing(this.currentLevel);
+      }
     }
   }
 
   doSignOut() {
     window.authSystem.signOut();
+    sessionStorage.removeItem('algoquest_entered');
     this.player = this.loadPlayerData();
     this.savePlayerData();
     this.updateHUD();
     this.updateQuestChain();
     this.profileModal.classList.remove('active');
+    if (this.loginModal) {
+      this.loginModal.classList.add('active');
+    }
     window.soundSystem?.playClick();
   }
 
@@ -580,7 +618,20 @@ class AlgoQuestApp {
 
   loadEditorCode(level, langId) {
     // Check for saved draft first
-    const draft = localStorage.getItem(`algoquest_draft_${level.id}_${langId}`);
+    let draft = localStorage.getItem(`algoquest_draft_${level.id}_${langId}`);
+
+    // If draft contains old pre-solved code, discard it so user starts with a clean empty template
+    if (draft && (
+      draft.includes('res[left], res[right] = res[right], res[left]') ||
+      draft.includes('seen[complement]') ||
+      draft.includes('diff in seen') ||
+      draft.includes('first, second = second, first + second') ||
+      draft.includes('result = a + b')
+    )) {
+      localStorage.removeItem(`algoquest_draft_${level.id}_${langId}`);
+      draft = null;
+    }
+
     if (draft) {
       this.codeEditorEl.value = draft;
     } else if (level.starterCodes && level.starterCodes[langId]) {
@@ -627,8 +678,9 @@ class AlgoQuestApp {
     const pool = this.currentMode === 'learn' ? (window.LESSONS || []) : (window.LEVELS || []);
     const currentId = this.currentLevel?.id;
 
+    const completedList = Array.isArray(this.player?.completedLevels) ? this.player.completedLevels : [];
     bar.innerHTML = pool.map((lvl, idx) => {
-      const isCompleted = this.player.completedLevels.includes(lvl.id);
+      const isCompleted = completedList.includes(lvl.id);
       const isCurrent = lvl.id === currentId;
       return `
         <div class="quest-chain-node ${isCompleted ? 'chain-completed' : ''} ${isCurrent ? 'chain-current' : ''}"
@@ -721,6 +773,12 @@ class AlgoQuestApp {
     this.updateQuestChain();
 
     this.savePlayerData();
+
+    // Show story briefing cutscene if player has entered the game
+    if (sessionStorage.getItem('algoquest_entered') && window.storyDialogue) {
+      window.storyDialogue.showBriefing(level);
+    }
+
     window.soundSystem?.playClick();
   }
 
