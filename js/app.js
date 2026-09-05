@@ -28,6 +28,11 @@ class AlgoQuestApp {
     // Initialize Auth
     this.initAuth();
 
+    // Initialize CodeCombat Dungeon Canvas Arena
+    if (window.dungeonArena) {
+      window.dungeonArena.init('dungeonCanvas');
+    }
+
     // Load initial level
     const savedLevelId = this.player.currentLevelId || 'level-1';
     this.loadLevel(savedLevelId);
@@ -42,22 +47,33 @@ class AlgoQuestApp {
   }
 
   loadPlayerData() {
+    let data = null;
     if (window.authSystem) {
-      const userSave = window.authSystem.loadProgress();
-      if (userSave) return userSave;
+      try {
+        data = window.authSystem.loadProgress();
+      } catch (e) {
+        console.warn('Player auth load error:', e);
+      }
     }
-    const saved = localStorage.getItem('algoquest_player');
-    if (saved) {
-      try { return JSON.parse(saved); } catch (e) { console.warn('Player data parse error:', e); }
+    if (!data) {
+      const saved = localStorage.getItem('algoquest_player');
+      if (saved) {
+        try { data = JSON.parse(saved); } catch (e) { console.warn('Player data parse error:', e); }
+      }
     }
-    return {
-      xp: 0, level: 1, gold: 0,
-      playerHp: 100, playerMaxHp: 100,
-      completedLevels: [],
-      relics: [],
-      currentLevelId: 'level-1',
-      langCompletions: {} // { python: ['level-1', ...], javascript: [...] }
-    };
+    if (!data || typeof data !== 'object') {
+      data = {};
+    }
+    data.xp = typeof data.xp === 'number' ? data.xp : 0;
+    data.level = typeof data.level === 'number' ? data.level : 1;
+    data.gold = typeof data.gold === 'number' ? data.gold : 0;
+    data.playerHp = typeof data.playerHp === 'number' ? data.playerHp : 100;
+    data.playerMaxHp = typeof data.playerMaxHp === 'number' ? data.playerMaxHp : 100;
+    data.completedLevels = Array.isArray(data.completedLevels) ? data.completedLevels : [];
+    data.relics = Array.isArray(data.relics) ? data.relics : [];
+    data.currentLevelId = data.currentLevelId || 'level-1';
+    data.langCompletions = (data.langCompletions && typeof data.langCompletions === 'object') ? data.langCompletions : {};
+    return data;
   }
 
   savePlayerData() {
@@ -485,14 +501,16 @@ class AlgoQuestApp {
     // Stats
     const allLevels = [...window.LEVELS, ...(window.LESSONS || [])];
     const totalQuests = allLevels.length;
-    const completedCount = this.player.completedLevels.length;
+    const completedList = Array.isArray(this.player?.completedLevels) ? this.player.completedLevels : [];
+    const relicsList = Array.isArray(this.player?.relics) ? this.player.relics : [];
+    const completedCount = completedList.length;
     const statsGrid = document.getElementById('profileStatsGrid');
     statsGrid.innerHTML = `
-      <div class="profile-stat"><div class="stat-value">${this.player.level}</div><div class="stat-label">Level</div></div>
-      <div class="profile-stat"><div class="stat-value">${this.player.xp}</div><div class="stat-label">Total XP</div></div>
-      <div class="profile-stat"><div class="stat-value">${this.player.gold}</div><div class="stat-label">Gold</div></div>
+      <div class="profile-stat"><div class="stat-value">${this.player.level || 1}</div><div class="stat-label">Level</div></div>
+      <div class="profile-stat"><div class="stat-value">${this.player.xp || 0}</div><div class="stat-label">Total XP</div></div>
+      <div class="profile-stat"><div class="stat-value">${this.player.gold || 0}</div><div class="stat-label">Gold</div></div>
       <div class="profile-stat"><div class="stat-value">${completedCount} / ${totalQuests}</div><div class="stat-label">Quests Done</div></div>
-      <div class="profile-stat"><div class="stat-value">${this.player.relics.length}</div><div class="stat-label">Relics</div></div>
+      <div class="profile-stat"><div class="stat-value">${relicsList.length}</div><div class="stat-label">Relics</div></div>
       <div class="profile-stat"><div class="stat-value">${window.authSystem.isGuest ? 'Local' : 'Cloud ☁️'}</div><div class="stat-label">Save Mode</div></div>
     `;
 
@@ -668,12 +686,26 @@ class AlgoQuestApp {
       this.teachingBlockEl.style.display = 'none';
     }
 
-    // Enemy Arena
-    this.enemyAvatarEl.textContent = level.enemy.avatar;
-    this.enemyNameEl.textContent = level.enemy.name;
-    this.enemyHpTextEl.textContent = `${level.enemy.hp} / ${level.enemy.hp} HP`;
-    this.enemyHpFillEl.style.width = '100%';
-    this.combatLogEl.textContent = `"${level.enemy.quote}"`;
+    // Enemy & Battle Arena Setup
+    if (this.enemyAvatarEl) this.enemyAvatarEl.textContent = level.enemy.avatar;
+    if (this.enemyNameEl) this.enemyNameEl.textContent = level.enemy.name;
+    if (this.enemyHpTextEl) this.enemyHpTextEl.textContent = `${level.enemy.hp} / ${level.enemy.hp} HP`;
+    if (this.enemyHpFillEl) this.enemyHpFillEl.style.width = '100%';
+    if (this.combatLogEl) this.combatLogEl.textContent = `"${level.enemy.quote}"`;
+
+    // CodeCombat 2D Dungeon Arena sync
+    if (window.dungeonArena) {
+      const currentLang = window.multiLangEngine ? window.multiLangEngine.getLanguage() : 'python';
+      const isMage = (currentLang === 'python' || currentLang === 'javascript');
+      window.dungeonArena.setCombatants({
+        heroName: this.player?.heroName || (isMage ? 'Py-Mage' : 'Code-Knight'),
+        heroRole: isMage ? 'mage' : 'knight',
+        enemyName: level.enemy?.name || 'Dungeon Boss',
+        enemyMaxHp: level.enemy?.hp || 100,
+        enemyAvatar: level.enemy?.avatar || '👹'
+      });
+      window.dungeonArena.showCombatText(`⚔️ Challenge: ${level.title}`, '#ffb703');
+    }
 
     // Code Editor
     const lang = window.multiLangEngine.getLanguage();
@@ -694,11 +726,25 @@ class AlgoQuestApp {
 
   resetStarterCode() {
     if (!this.currentLevel) return;
-    if (confirm('Reset editor to original starter code?')) {
-      const lang = window.multiLangEngine.getLanguage();
-      localStorage.removeItem(`algoquest_draft_${this.currentLevel.id}_${lang}`);
-      this.loadEditorCode(this.currentLevel, lang);
-      window.soundSystem?.playClick();
+    const lang = window.multiLangEngine.getLanguage();
+    localStorage.removeItem(`algoquest_draft_${this.currentLevel.id}_${lang}`);
+    this.loadEditorCode(this.currentLevel, lang);
+    window.soundSystem?.playClick();
+
+    // Visual feedback on button
+    if (this.resetCodeBtn) {
+      const originalHtml = this.resetCodeBtn.innerHTML;
+      this.resetCodeBtn.innerHTML = '✓ Reset!';
+      this.resetCodeBtn.style.borderColor = 'var(--green)';
+      this.resetCodeBtn.style.color = 'var(--green)';
+      setTimeout(() => {
+        this.resetCodeBtn.innerHTML = originalHtml;
+        this.resetCodeBtn.style.borderColor = '';
+        this.resetCodeBtn.style.color = '';
+      }, 1000);
+    }
+    if (window.dungeonArena) {
+      window.dungeonArena.showCombatText('Code Reset to Default', '#00e5ff');
     }
   }
 
@@ -796,9 +842,20 @@ class AlgoQuestApp {
         <div class="stdout-box" style="color:var(--crimson); max-height:160px;">${this.esc(runResult.error)}</div>
       `;
       window.soundSystem?.playDefeat();
+      if (window.dungeonArena) {
+        window.dungeonArena.enemyAttack(12, 'Runtime Error Detected!');
+      }
     } else {
       this.renderTestRunResult(runResult.results[this.activeTestTab]);
       window.soundSystem?.[runResult.passed ? 'playSuccess' : 'playDefeat']();
+      if (window.dungeonArena) {
+        if (runResult.passed) {
+          const dmg = 15 + Math.floor(Math.random() * 15);
+          window.dungeonArena.heroAttack(dmg, 'strike');
+        } else {
+          window.dungeonArena.enemyAttack(10, 'Tests Failed!');
+        }
+      }
     }
   }
 
@@ -815,27 +872,38 @@ class AlgoQuestApp {
     this.submitBtn.innerHTML = '⚔️ Submit Solution';
 
     if (runResult.passed) {
-      this.heroAvatarEl.classList.add('attack-lunge-right');
+      if (this.heroAvatarEl) this.heroAvatarEl.classList.add('attack-lunge-right');
       window.soundSystem?.playAttack();
+      if (window.dungeonArena) {
+        window.dungeonArena.heroAttack(999, 'magic');
+      }
 
       setTimeout(() => {
-        this.heroAvatarEl.classList.remove('attack-lunge-right');
-        this.enemyAvatarEl.classList.add('hit-shake');
+        if (this.heroAvatarEl) this.heroAvatarEl.classList.remove('attack-lunge-right');
+        if (this.enemyAvatarEl) this.enemyAvatarEl.classList.add('hit-shake');
         window.soundSystem?.playMonsterHit();
-        this.enemyHpFillEl.style.width = '0%';
-        this.enemyHpTextEl.textContent = '0 HP (Defeated!)';
-        this.combatLogEl.textContent = `💥 ${this.currentLevel.enemy.name} was vanquished!`;
+        if (this.enemyHpFillEl) this.enemyHpFillEl.style.width = '0%';
+        if (this.enemyHpTextEl) this.enemyHpTextEl.textContent = '0 HP (Defeated!)';
+        if (this.combatLogEl) this.combatLogEl.textContent = `💥 ${this.currentLevel.enemy.name} was vanquished!`;
 
         setTimeout(() => {
-          this.enemyAvatarEl.classList.remove('hit-shake');
+          if (this.enemyAvatarEl) this.enemyAvatarEl.classList.remove('hit-shake');
+          if (window.dungeonArena) {
+            window.dungeonArena.celebrateVictory();
+          }
           this.handleQuestVictory();
         }, 700);
       }, 350);
     } else {
-      this.combatLogEl.textContent = `🛡️ Attack Deflected! Fix failing tests first!`;
-      this.enemyAvatarEl.classList.add('hit-shake');
+      if (this.combatLogEl) this.combatLogEl.textContent = `🛡️ Attack Deflected! Fix failing tests first!`;
+      if (this.enemyAvatarEl) {
+        this.enemyAvatarEl.classList.add('hit-shake');
+        setTimeout(() => this.enemyAvatarEl.classList.remove('hit-shake'), 400);
+      }
       window.soundSystem?.playDefeat();
-      setTimeout(() => this.enemyAvatarEl.classList.remove('hit-shake'), 400);
+      if (window.dungeonArena) {
+        window.dungeonArena.enemyAttack(18, 'Solution Deflected!');
+      }
       const firstFail = runResult.results.findIndex(r => !r.passed);
       if (firstFail !== -1) this.setActiveTestTab(firstFail);
     }
@@ -844,6 +912,8 @@ class AlgoQuestApp {
   handleQuestVictory() {
     const level = this.currentLevel;
     const lang = window.multiLangEngine.getLanguage();
+    if (!Array.isArray(this.player.completedLevels)) this.player.completedLevels = [];
+    if (!Array.isArray(this.player.relics)) this.player.relics = [];
     const isFirstTime = !this.player.completedLevels.includes(level.id);
 
     if (isFirstTime) {
@@ -946,8 +1016,9 @@ class AlgoQuestApp {
       `;
       grid.appendChild(realmHeader);
 
+      const completedList = Array.isArray(this.player?.completedLevels) ? this.player.completedLevels : [];
       levels.forEach(level => {
-        const isCompleted = this.player.completedLevels.includes(level.id);
+        const isCompleted = completedList.includes(level.id);
         const isActive = this.currentLevel && this.currentLevel.id === level.id;
         const lang = window.multiLangEngine.getLanguage();
         const langCompleted = (this.player.langCompletions?.[lang] || []).includes(level.id);
@@ -981,13 +1052,15 @@ class AlgoQuestApp {
 
   openRelicsModal() {
     const grid = document.getElementById('relicsGrid');
-    grid.innerHTML = this.player.relics.length === 0
+    if (!grid) return;
+    const relics = Array.isArray(this.player?.relics) ? this.player.relics : [];
+    grid.innerHTML = relics.length === 0
       ? `<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:30px;">No relics yet. Slay bosses to claim artifacts!</div>`
-      : this.player.relics.map(r => `
+      : relics.map(r => `
         <div class="relic-card unlocked">
           <div class="relic-icon">👑</div>
-          <div class="relic-name">${r.name}</div>
-          <div class="relic-desc">${r.description}</div>
+          <div class="relic-name">${r.name || 'Ancient Relic'}</div>
+          <div class="relic-desc">${r.description || ''}</div>
         </div>
       `).join('');
     this.relicsModal.classList.add('active');
